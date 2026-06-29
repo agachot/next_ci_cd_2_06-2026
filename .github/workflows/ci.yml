@@ -32,4 +32,4 @@ jobs:
         run: docker compose exec -T -w /front/front node npm test --passWithNoTests #pas nécessaire pas npm fait les test dans le build
 
       - name: install dependencies
-        run: docker compose exec -T -w /front/front node npm build
+        run: docker compose exec -T -w /front/front node npm run build

@@ -48,7 +48,7 @@ jobs:
       - name: build and push on ghcr
         uses: docker/build-push-action@v7
         with:
-          context: ${{ github.repository }}
+          context: ${{ github.repository }}/prod
           file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}

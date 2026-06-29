@@ -1,4 +1,9 @@
 services:
+
+  node_image_dockerfile:
+    container_name: node_image_dockerfile
+    build: ./
+
   node:
     container_name: node
     image: node:26-alpine3.24
@@ -8,3 +13,41 @@ services:
     ports:
       - "3000:3000"
     tty: yes
+    networks:
+      - myapp
+
+  postgres:
+    container_name: postgres
+    image: postgres:18-alpine3.24
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER} # The PostgreSQL user (useful to connect to the database)
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD} # The PostgreSQL password (useful to connect to the database)
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - 'db:/var/lib/postgresql/18/docker'
+    networks:
+      - myapp
+
+  redis:
+    container_name: redis
+    image: redis:8.8-alpine3.23
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+    environment:
+      - REDIS_ARGS=${REDIS_ARGS}
+    restart: unless-stopped
+    networks:
+      - myapp
+
+networks:
+  myapp:
+    driver: bridge # seul les services de ce cdocker compose peuvent communiquert entre eux
+
+volumes:
+  db:
+  redis-data:
+    driver: local

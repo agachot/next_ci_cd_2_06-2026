@@ -29,7 +29,7 @@ jobs:
         run: docker compose exec -T -w /front/front node npm ci
 
       - name: run test
-        run: docker compose exec -T -w /front/front node npm test --passWithNoTests #pas nécessaire pas npm fait les test dans le build
+        run: docker compose exec -T -w /front/front node npm test -- --ci --passWithNoTests #pas nécessaire pas npm fait les test dans le build
 
       - name: build app
         run: docker compose exec -T -w /front/front node npm run build

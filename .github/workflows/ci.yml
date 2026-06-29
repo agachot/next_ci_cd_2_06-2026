@@ -23,5 +23,5 @@ jobs:
           docker compose version
 
       - name: docker up
-        run: docker compose up
+        run: docker compose up -d
       

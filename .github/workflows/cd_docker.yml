@@ -43,12 +43,12 @@ jobs:
           images: ${{ env.IMAGE-NAME }}
           tags: |
             type=ref,event=branch
-            type=sha, prefix=sha-
+            type=sha,prefix=sha-
 
       - name: build and push on ghcr
         uses: docker/build-push-action@v7
         with:
-          context: .
+          context: ${{ github.repository }}
           file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}

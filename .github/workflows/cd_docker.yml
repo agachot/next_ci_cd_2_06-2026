@@ -26,6 +26,9 @@ jobs:
 #    if: ${{github.event.workflow_run.conclusion == 'success'}}
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
       - name: config_docker_buildX
         uses: docker/setup-buildx-action@v4
 
@@ -48,7 +51,7 @@ jobs:
       - name: build and push on ghcr
         uses: docker/build-push-action@v7
         with:
-          context: https://github.com/agachot/${{ github.repository }}/tree/prod
+          context: .
           file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}

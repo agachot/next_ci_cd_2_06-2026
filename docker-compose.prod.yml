@@ -1,16 +1,7 @@
 services:
-
-#  node_image_dockerfile:
-#    container_name: node_image_dockerfile
-#    build: ./
-
-  node:
-    container_name: node
-    image: node:26-alpine3.24
-    working_dir: /front
-    volumes:
-      - ./:/front
-    tty: yes
+  app:
+    container_name: app
+    image: ghcr.io/agachot/next_ci_cd_2_06-2026:prod
     networks:
       - myapp
 

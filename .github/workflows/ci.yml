@@ -3,14 +3,13 @@ name: CI
 on:
   pull_request:
     branches:
-      - prod
+      - dev
   push:
     branches:
       - dev
-      - prod
 
 jobs:
-  build_docker:
+  build_docker_and_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,3 +36,17 @@ jobs:
       - name: stop docker
         if: always()
         run: docker compose down
+
+  check_image_docker:
+    needs: build_docker_and_test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Docker scout
+        uses: docker/scout-action@v1
+        with:
+          command: cves, recommendations, compare
+          image: postgres:18-alpine3.24
+          to: postgres:latest
+          ignore-unchanged: true
+          only-unfixed: true

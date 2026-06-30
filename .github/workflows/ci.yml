@@ -67,14 +67,14 @@ jobs:
           ignore-unfixed: 'false'
           severity: 'HIGH,CRITICAL'
 
-    renovate:
-      needs: check_image_docker
-      runs-on: ubuntu-latest
+  renovate:
+    needs: check_image_docker
+    runs-on: ubuntu-latest
 
-      steps:
-        - name: check docker compose renovate
-          uses: renovatebot/github-action@v46.1.7
-          env:
-            LOG_LEVEL: "warn"
-            RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
-            RENOVATE_REPOSITORIES: "agachot/next_ci_cd_2_06-2026"
+    steps:
+      - name: check docker compose renovate
+        uses: renovatebot/github-action@v46.1.7
+        env:
+          LOG_LEVEL: "warn"
+          RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+          RENOVATE_REPOSITORIES: "agachot/next_ci_cd_2_06-2026"

@@ -67,7 +67,7 @@ jobs:
           ignore-unfixed: 'false'
           severity: 'HIGH,CRITICAL'
 
-  renovate:
+  renovates:
     needs: check_image_docker
     runs-on: ubuntu-latest
 

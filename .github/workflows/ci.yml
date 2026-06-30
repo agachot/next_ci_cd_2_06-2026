@@ -6,7 +6,7 @@ on:
       - dev
   push:
     branches:
-      - dev
+      - ci_dockerscout
 
 jobs:
   build_docker_and_test:

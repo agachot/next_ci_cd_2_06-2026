@@ -61,8 +61,20 @@ jobs:
       - name: trivy - scan image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: postgres:18-alpine3.24
+          image-ref: node:26-alpine3.24
           format: 'table'
           exit-code: 0
           ignore-unfixed: 'false'
           severity: 'HIGH,CRITICAL'
+
+    renovate:
+      needs: check_image_docker
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: check docker compose renovate
+          uses: renovatebot/github-action@v46.1.7
+          env:
+            LOG_LEVEL: "warn"
+            RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+            RENOVATE_REPOSITORIES: "agachot/next_ci_cd_2_06-2026"
